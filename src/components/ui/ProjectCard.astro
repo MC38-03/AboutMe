@@ -14,7 +14,8 @@ interface Props {
 const { project, lang, large = false, class: className } = Astro.props;
 const t = useTranslations(lang);
 const { data } = project;
-const href = localePath(lang, `/projects/${projectSlug(project)}`);
+const slug = projectSlug(project);
+const href = localePath(lang, `/projects/${slug}`);
 const year = data.period.start.slice(0, 4);
 const stack = large ? data.stack : data.stack.slice(0, 4);
 ---
@@ -40,6 +41,7 @@ const stack = large ? data.stack : data.stack.slice(0, 4);
         "border-border bg-bg/70 text-accent absolute grid place-items-center rounded-2xl border shadow-lg backdrop-blur transition duration-500 group-hover:scale-110 group-hover:-rotate-6",
         large ? "top-10 left-8 size-24" : "top-6 left-6 size-16",
       ]}
+      style={{ viewTransitionName: `project-icon-${slug}` }}
     >
       <Icon
         name={data.icon}
@@ -86,6 +88,7 @@ const stack = large ? data.stack : data.stack.slice(0, 4);
         "mt-4 font-bold tracking-tight",
         large ? "text-3xl" : "text-xl",
       ]}
+      style={{ viewTransitionName: `project-title-${slug}` }}
     >
       <a
         href={href}
