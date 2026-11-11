@@ -216,6 +216,10 @@ export const en = {
   "term.gta": "Soon. Until then: writing code.",
   "term.opening": "Opening:",
 
+  "notFound.title": "Page not found",
+  "notFound.text":
+    "This page doesn't exist (anymore). Maybe the command palette can help?",
+  "notFound.home": "Back to home",
   "footer.built": "Built with Astro, React and Tailwind CSS.",
   "footer.source": "Source",
   "footer.terminal": "Tip: press ` for the terminal",

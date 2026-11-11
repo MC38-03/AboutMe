@@ -216,6 +216,10 @@ export const nl = {
   "term.gta": "Binnenkort. Tot die tijd: code schrijven.",
   "term.opening": "Openen:",
 
+  "notFound.title": "Pagina niet gevonden",
+  "notFound.text":
+    "Deze pagina bestaat niet (meer). Misschien vind je het via de command palette?",
+  "notFound.home": "Terug naar home",
   "footer.built": "Gebouwd met Astro, React en Tailwind CSS.",
   "footer.source": "Broncode",
   "footer.terminal": "Tip: druk op ` voor de terminal",
