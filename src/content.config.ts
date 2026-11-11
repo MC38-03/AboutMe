@@ -21,6 +21,9 @@ const projects = defineCollection({
         period: z.object({ start: yearMonth, end: yearMonth.optional() }),
         order: z.number().int().nonnegative(),
         featured: z.boolean().default(false),
+        icon: z
+          .enum(["dumbbell", "discussion", "wallet", "code"])
+          .default("code"),
         role: z.string().min(1),
         team: z.string().optional(),
         stack: z.array(z.string().min(1)).min(1),
@@ -49,6 +52,7 @@ const timeline = defineCollection({
     id: z.string().min(1),
     start: yearMonth,
     end: yearMonth.optional(),
+    current: z.boolean().default(false),
     kind: z.enum(["education", "work", "internship", "volunteer", "milestone"]),
     title: localized,
     org: z.string().optional(),

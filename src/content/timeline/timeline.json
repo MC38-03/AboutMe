@@ -77,7 +77,10 @@
     "start": "2025-07",
     "kind": "education",
     "org": "MBO College Amstelland",
-    "title": { "nl": "Mbo-diploma behaald", "en": "MBO diploma" },
+    "title": {
+      "nl": "Mbo-diploma behaald",
+      "en": "MBO diploma"
+    },
     "description": {
       "nl": "Diploma Software Developer op zak.",
       "en": "Graduated as a Software Developer."
@@ -85,6 +88,7 @@
   },
   {
     "id": "hva",
+    "current": true,
     "start": "2025-09",
     "kind": "education",
     "org": "Hogeschool van Amsterdam",
@@ -99,10 +103,14 @@
   },
   {
     "id": "workrate",
+    "current": true,
     "start": "2025-10",
     "kind": "work",
     "org": "Workrate, Amsterdam",
-    "title": { "nl": "Objectbeveiliger", "en": "Security guard" },
+    "title": {
+      "nl": "Objectbeveiliger",
+      "en": "Security guard"
+    },
     "description": {
       "nl": "Naast mijn studie verantwoordelijk voor de veiligheid op locatie. Betrouwbaar zijn, alert blijven en rustig handelen onder druk.",
       "en": "Alongside my studies, responsible for on-site security. Being reliable, staying alert and keeping calm under pressure."
