@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import portrait from "@/assets/images/portrait.jpg";
 import { site } from "@/data/site";
 import type { Locale } from "@/i18n/locales";
-import { useTranslations } from "@/i18n/ui";
+import { useTranslations } from "@/i18n/utils";
 
 interface Props {
   lang: Locale;
@@ -11,41 +11,292 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const [firstName, ...rest] = site.name.split(" ");
+const lastName = rest.join(" ");
+
+type Shape = "ring" | "square" | "plus" | "triangle" | "squiggle" | "dot";
+
+interface Floater {
+  shape: Shape;
+  className: string;
+  dx: string;
+  dy: string;
+  r: string;
+  delay: string;
+  slow?: boolean;
+}
+
+const floaters: Floater[] = [
+  {
+    shape: "ring",
+    className: "top-[14%] left-[8%] size-16",
+    dx: "10px",
+    dy: "-28px",
+    r: "0deg",
+    delay: "0s",
+  },
+  {
+    shape: "square",
+    className: "top-[22%] right-[10%] size-10",
+    dx: "-14px",
+    dy: "-20px",
+    r: "24deg",
+    delay: "-3s",
+    slow: true,
+  },
+  {
+    shape: "plus",
+    className: "bottom-[26%] left-[14%] size-8",
+    dx: "16px",
+    dy: "-18px",
+    r: "0deg",
+    delay: "-5s",
+  },
+  {
+    shape: "triangle",
+    className: "bottom-[18%] right-[16%] size-14",
+    dx: "-10px",
+    dy: "-26px",
+    r: "-14deg",
+    delay: "-2s",
+    slow: true,
+  },
+  {
+    shape: "squiggle",
+    className: "top-[40%] left-[4%] w-24",
+    dx: "12px",
+    dy: "-16px",
+    r: "-8deg",
+    delay: "-7s",
+    slow: true,
+  },
+  {
+    shape: "dot",
+    className: "top-[10%] right-[30%] size-3",
+    dx: "8px",
+    dy: "-30px",
+    r: "0deg",
+    delay: "-1s",
+  },
+  {
+    shape: "dot",
+    className: "bottom-[12%] left-[34%] size-2",
+    dx: "-8px",
+    dy: "-22px",
+    r: "0deg",
+    delay: "-4s",
+  },
+  {
+    shape: "ring",
+    className: "top-[52%] right-[5%] size-7",
+    dx: "-6px",
+    dy: "-24px",
+    r: "0deg",
+    delay: "-6s",
+  },
+];
+
+const chips = [
+  {
+    text: "</>",
+    className: "top-[30%] left-[18%] hidden lg:block",
+    delay: "-2s",
+  },
+  {
+    text: "{ build: true }",
+    className: "top-[16%] right-[20%] hidden md:block",
+    delay: "-6s",
+  },
+  {
+    text: "git push",
+    className: "bottom-[30%] right-[7%] hidden lg:block",
+    delay: "-4s",
+  },
+  {
+    text: "npm run dev",
+    className: "bottom-[14%] left-[6%] hidden md:block",
+    delay: "-8s",
+  },
+];
 ---
 
-<section class="mx-auto grid max-w-5xl items-center gap-10 px-4 py-16 sm:px-6 md:grid-cols-[1fr_auto] md:py-24">
-  <div>
-    <p class="text-accent font-mono text-sm">{t("hero.greeting")}</p>
-    <h1 class="mt-2 text-4xl font-bold tracking-tight text-balance sm:text-5xl">
-      {site.name}
+<section class="relative isolate flex min-h-[calc(100dvh-4rem)] items-center justify-center overflow-hidden px-4 py-20 sm:px-6">
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+    <div class="animate-aurora bg-accent absolute top-[-20%] left-[10%] size-[38rem] rounded-full opacity-25 blur-[120px] dark:opacity-20"></div>
+    <div class="animate-aurora bg-accent-2 absolute right-[5%] bottom-[-25%] size-[32rem] rounded-full opacity-20 blur-[120px] [animation-delay:-10s] dark:opacity-15"></div>
+    <div class="absolute inset-0 [background-image:radial-gradient(var(--border)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]"></div>
+
+    {floaters.map((f) => (
+      <div
+        class:list={[
+          "text-accent absolute",
+          f.slow ? "animate-float-slow" : "animate-float",
+          f.className,
+        ]}
+        style={{
+          "--dx": f.dx,
+          "--dy": f.dy,
+          "--r": f.r,
+          animationDelay: f.delay,
+        }}
+      >
+        {f.shape === "ring" && (
+          <div class="size-full rounded-full border-2 border-current opacity-50" />
+        )}
+        {f.shape === "square" && (
+          <div class="from-accent to-accent-2 size-full rounded-xl bg-linear-to-br opacity-60" />
+        )}
+        {f.shape === "dot" && (
+          <div class="bg-accent-2 size-full rounded-full opacity-80" />
+        )}
+        {f.shape === "plus" && (
+          <svg
+            viewBox="0 0 24 24"
+            class="size-full opacity-70"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+          >
+            <path d="M12 3v18M3 12h18" />
+          </svg>
+        )}
+        {f.shape === "triangle" && (
+          <svg
+            viewBox="0 0 24 24"
+            class="text-accent-2 size-full opacity-60"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linejoin="round"
+          >
+            <path d="M12 3 22 20H2z" />
+          </svg>
+        )}
+        {f.shape === "squiggle" && (
+          <svg
+            viewBox="0 0 100 20"
+            class="w-full opacity-60"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+          >
+            <path d="M2 10q8-10 16 0t16 0 16 0 16 0 16 0 16 0" />
+          </svg>
+        )}
+      </div>
+    ))}
+
+    {chips.map((chip) => (
+      <span
+        class:list={[
+          "animate-float-slow border-border bg-surface/70 text-muted absolute rounded-lg border px-3 py-1.5 font-mono text-xs shadow-sm backdrop-blur",
+          chip.className,
+        ]}
+        style={{ "--dy": "-18px", animationDelay: chip.delay }}
+      >
+        {chip.text}
+      </span>
+    ))}
+  </div>
+
+  <div class="flex max-w-3xl flex-col items-center text-center">
+    <div class="animate-rise relative mb-10 size-44 sm:size-52">
+      <div
+        aria-hidden="true"
+        class="animate-blob absolute -inset-3 overflow-hidden opacity-90"
+      >
+        <div class="animate-spin-slow absolute -inset-1/2 bg-[conic-gradient(from_0deg,var(--accent),var(--accent-2),transparent_60%,var(--accent))]"></div>
+      </div>
+      <Image
+        src={portrait}
+        alt={t("hero.portraitAlt")}
+        width={416}
+        height={416}
+        loading="eager"
+        fetchpriority="high"
+        class="animate-blob ring-bg relative size-full object-cover ring-4"
+      />
+      <div
+        aria-hidden="true"
+        class="animate-spin-slow absolute -inset-8 [animation-direction:reverse]"
+      >
+        <span class="bg-accent shadow-accent absolute top-1/2 -left-1 size-3 rounded-full shadow-[0_0_16px]"></span>
+      </div>
+    </div>
+
+    <p class="animate-rise border-border bg-surface/60 text-muted inline-flex items-center gap-2 rounded-full border px-4 py-1.5 font-mono text-xs backdrop-blur [animation-delay:100ms]">
+      <span class="relative flex size-2">
+        <span class="bg-accent absolute inline-flex size-full animate-ping rounded-full opacity-75"></span>
+        <span class="bg-accent relative inline-flex size-2 rounded-full"></span>
+      </span>
+      {t("hero.badge")} · {site.location}
+    </p>
+
+    <h1 class="animate-rise mt-6 text-5xl font-bold tracking-tighter text-balance [animation-delay:200ms] sm:text-7xl">
+      <span class="text-muted block font-mono text-base font-normal tracking-normal sm:text-lg">
+        {t("hero.greeting")}
+      </span>
+      {firstName}{" "}
+      <span class="from-accent to-accent-2 bg-linear-to-r bg-clip-text text-transparent">
+        {lastName}
+      </span>
     </h1>
-    <p class="text-muted mt-3 text-lg">{t("hero.role")}</p>
-    <p class="mt-6 max-w-xl text-lg leading-relaxed text-pretty">
+
+    <p class="animate-rise text-accent mt-4 font-mono text-sm [animation-delay:300ms] sm:text-base">
+      &gt; {t("hero.role")}
+      <span class="animate-pulse">_</span>
+    </p>
+
+    <p class="animate-rise text-muted mt-6 max-w-xl text-lg leading-relaxed text-pretty [animation-delay:400ms]">
       {t("hero.intro")}
     </p>
-    <div class="mt-8 flex flex-wrap gap-3">
+
+    <div class="animate-rise mt-10 flex flex-wrap justify-center gap-3 [animation-delay:500ms]">
       <a
         href="#projects"
-        class="bg-accent text-accent-fg rounded-lg px-5 py-2.5 text-sm font-medium transition-opacity hover:opacity-90"
+        class="bg-accent text-accent-fg shadow-accent/30 rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
       >
         {t("hero.cta.projects")}
       </a>
       <a
+        href="#contact"
+        class="border-border bg-surface/60 hover:border-accent rounded-full border px-6 py-3 text-sm font-semibold backdrop-blur transition hover:-translate-y-0.5"
+      >
+        {t("hero.cta.contact")}
+      </a>
+      <a
         href={site.cvPath}
         download
-        class="border-border hover:bg-surface rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors"
+        class="text-muted hover:text-fg inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-semibold transition"
       >
+        <svg
+          class="size-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16" />
+        </svg>
         {t("hero.cta.cv")}
       </a>
     </div>
   </div>
-  <Image
-    src={portrait}
-    alt={t("hero.portraitAlt")}
-    width={256}
-    height={256}
-    loading="eager"
-    fetchpriority="high"
-    class="border-border size-40 rounded-2xl border object-cover shadow-sm md:size-64"
-  />
+
+  <a
+    href="#projects"
+    class="text-muted hover:text-fg absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] tracking-[0.3em] uppercase"
+  >
+    {t("hero.scroll")}
+    <span class="border-border flex h-9 w-5 justify-center rounded-full border-2 pt-1.5">
+      <span
+        class="animate-float bg-accent block h-2 w-1 rounded-full"
+        style={{ "--dy": "10px" }}
+      ></span>
+    </span>
+  </a>
 </section>
