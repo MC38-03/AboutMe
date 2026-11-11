@@ -1,0 +1,74 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+import type { IconName } from "@/lib/icons";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+import { skillGroups, type SkillGroupId } from "@/data/skills";
+import type { Locale } from "@/i18n/locales";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const groupIcon: Record<SkillGroupId, IconName> = {
+  languages: "code",
+  frontend: "spark",
+  backend: "globe",
+  tools: "briefcase",
+};
+
+const softSkills = t("skills.soft").split(", ");
+---
+
+<section
+  aria-labelledby="skills-title"
+  id="skills"
+  class="relative mx-auto max-w-6xl scroll-mt-20 px-4 py-24 sm:px-6"
+>
+  <SectionHeading
+    id="skills-title"
+    index="04"
+    label={t("skills.label")}
+    heading={t("skills.heading")}
+    intro={t("skills.intro")}
+  />
+
+  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    {skillGroups.map((group, i) => (
+      <div
+        class="reveal group border-border bg-surface/70 hover:border-accent/50 relative overflow-hidden rounded-3xl border p-6 backdrop-blur transition"
+        style={{ "--reveal-delay": `${String(i * 80)}ms` }}
+      >
+        <div
+          aria-hidden="true"
+          class="bg-accent/10 absolute -top-10 -right-10 size-28 rounded-full transition-transform duration-500 group-hover:scale-150"
+        />
+        <div class="bg-accent-soft text-accent relative grid size-10 place-items-center rounded-xl">
+          <Icon name={groupIcon[group.id]} />
+        </div>
+        <h3 class="relative mt-4 font-semibold">
+          {t(`skills.group.${group.id}`)}
+        </h3>
+        <ul class="relative mt-4 flex flex-wrap gap-2">
+          {group.items.map((item) => (
+            <li class="bg-bg border-border hover:border-accent hover:text-accent rounded-lg border px-2.5 py-1 font-mono text-xs transition-colors">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <div class="reveal border-border text-muted mt-5 flex flex-wrap items-center gap-3 rounded-3xl border border-dashed px-6 py-4 text-sm">
+    <span class="text-accent font-mono text-xs uppercase tracking-widest">
+      {t("skills.group.soft")}
+    </span>
+    {softSkills.map((skill) => (
+      <span class="text-fg">{skill}</span>
+    ))}
+  </div>
+</section>

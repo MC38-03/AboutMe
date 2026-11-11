@@ -1,0 +1,89 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+import type { IconName } from "@/lib/icons";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+import { site } from "@/data/site";
+import type { Locale } from "@/i18n/locales";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const languages = site.spokenLanguages
+  .map((l) => `${t(`spoken.${l.code}`)} (${t(`level.${l.level}`)})`)
+  .join(", ");
+
+const facts: { icon: IconName; label: string; value: string }[] = [
+  { icon: "pin", label: t("about.fact.location"), value: site.location },
+  {
+    icon: "school",
+    label: t("about.fact.study"),
+    value: t("about.fact.studyValue"),
+  },
+  {
+    icon: "spark",
+    label: t("about.fact.now"),
+    value: t("about.fact.nowValue"),
+  },
+  { icon: "globe", label: t("about.fact.languages"), value: languages },
+  {
+    icon: "heart",
+    label: t("about.fact.hobbies"),
+    value: t("about.fact.hobbiesValue"),
+  },
+];
+---
+
+<section
+  aria-labelledby="about-title"
+  id="about"
+  class="relative mx-auto max-w-6xl scroll-mt-20 px-4 py-24 sm:px-6"
+>
+  <SectionHeading
+    id="about-title"
+    index="01"
+    label={t("about.label")}
+    heading={t("about.heading")}
+  />
+
+  <div class="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
+    <div class="reveal text-muted space-y-5 text-lg leading-relaxed">
+      <p>{t("about.p1")}</p>
+      <p>{t("about.p2")}</p>
+      <p>{t("about.p3")}</p>
+    </div>
+
+    <div class="reveal border-border bg-surface/60 relative overflow-hidden rounded-3xl border p-6 backdrop-blur [--reveal-delay:150ms]">
+      <div
+        aria-hidden="true"
+        class="animate-blob bg-accent/20 absolute -top-16 -right-16 size-48 blur-2xl"
+      ></div>
+      <h3 class="text-muted relative font-mono text-xs tracking-widest uppercase">
+        {t("about.facts")}
+      </h3>
+      <dl class="relative mt-5 space-y-4">
+        {facts.map((fact) => (
+          <div class="flex gap-4">
+            <dt class="bg-accent-soft text-accent grid size-10 shrink-0 place-items-center rounded-xl">
+              <Icon name={fact.icon} />
+              <span class="sr-only">{fact.label}</span>
+            </dt>
+            <dd>
+              <span
+                class="text-muted block font-mono text-xs"
+                aria-hidden="true"
+              >
+                {fact.label}
+              </span>
+              <span class="font-medium">{fact.value}</span>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>

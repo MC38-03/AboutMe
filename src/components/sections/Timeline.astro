@@ -1,0 +1,101 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+import type { IconName } from "@/lib/icons";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+import type { Locale } from "@/i18n/locales";
+import { useTranslations } from "@/i18n/utils";
+import { getTimeline, type TimelineItem } from "@/lib/content";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const items = await getTimeline();
+
+const kindIcon: Record<TimelineItem["data"]["kind"], IconName> = {
+  education: "school",
+  work: "briefcase",
+  internship: "code",
+  volunteer: "users",
+  milestone: "flag",
+};
+
+const monthFormat = new Intl.DateTimeFormat(lang === "nl" ? "nl-NL" : "en-GB", {
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+function formatMonth(value: string): string {
+  return monthFormat.format(new Date(`${value}-01T00:00:00Z`));
+}
+
+function formatRange({ start, end, current }: TimelineItem["data"]): string {
+  if (end) return `${formatMonth(start)} – ${formatMonth(end)}`;
+  if (current) return `${formatMonth(start)} – ${t("timeline.present")}`;
+  return formatMonth(start);
+}
+---
+
+<section
+  aria-labelledby="timeline-title"
+  id="timeline"
+  class="relative mx-auto max-w-6xl scroll-mt-20 px-4 py-24 sm:px-6"
+>
+  <SectionHeading
+    id="timeline-title"
+    index="03"
+    label={t("timeline.label")}
+    heading={t("timeline.heading")}
+  />
+
+  <ol class="relative">
+    <span
+      aria-hidden="true"
+      class="from-accent via-accent-2 absolute top-2 bottom-2 left-5 w-px bg-linear-to-b to-transparent md:left-1/2"
+    ></span>
+    {items.map((item, i) => {
+      const left = i % 2 === 0;
+      return (
+        <li
+          class:list={[
+            "reveal relative grid gap-4 pb-10 pl-14 md:grid-cols-2 md:gap-16 md:pl-0",
+            i > 0 && "md:-mt-20",
+          ]}
+        >
+          <span
+            class:list={[
+              "absolute top-1 left-0 z-10 grid size-10 place-items-center rounded-full border shadow-sm md:left-1/2 md:-translate-x-1/2",
+              item.data.current
+                ? "bg-accent border-accent text-accent-fg shadow-[0_0_20px_var(--accent)]"
+                : "border-border bg-surface text-accent",
+            ]}
+            aria-hidden="true"
+          >
+            <Icon name={kindIcon[item.data.kind]} class="size-4" />
+          </span>
+          <div
+            class:list={[
+              "border-border bg-surface/70 hover:border-accent/50 rounded-2xl border p-5 backdrop-blur transition-colors",
+              left ? "md:col-start-1 md:mr-6" : "md:col-start-2 md:ml-6",
+            ]}
+          >
+            <p class="text-accent flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs">
+              <time datetime={item.data.start}>{formatRange(item.data)}</time>
+              <span class="text-muted">
+                · {t(`timeline.kind.${item.data.kind}`)}
+              </span>
+            </p>
+            <h3 class="mt-2 text-lg font-semibold">{item.data.title[lang]}</h3>
+            {item.data.org && <p class="text-muted text-sm">{item.data.org}</p>}
+            <p class="text-muted mt-3 text-pretty">
+              {item.data.description[lang]}
+            </p>
+          </div>
+        </li>
+      );
+    })}
+  </ol>
+</section>

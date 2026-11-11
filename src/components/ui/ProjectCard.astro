@@ -1,0 +1,132 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+import type { Locale } from "@/i18n/locales";
+import { localePath, useTranslations } from "@/i18n/utils";
+import { projectSlug, type Project } from "@/lib/content";
+
+interface Props {
+  project: Project;
+  lang: Locale;
+  large?: boolean;
+  class?: string;
+}
+
+const { project, lang, large = false, class: className } = Astro.props;
+const t = useTranslations(lang);
+const { data } = project;
+const href = localePath(lang, `/projects/${projectSlug(project)}`);
+const year = data.period.start.slice(0, 4);
+const stack = large ? data.stack : data.stack.slice(0, 4);
+---
+
+<article
+  class:list={[
+    "group reveal border-border bg-surface/70 hover:border-accent/60 relative flex flex-col overflow-hidden rounded-3xl border backdrop-blur transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_-20px_var(--accent)]",
+    className,
+  ]}
+>
+  <div
+    aria-hidden="true"
+    class:list={[
+      "relative overflow-hidden",
+      large ? "h-56 sm:h-80 md:h-96" : "h-36",
+    ]}
+  >
+    <div class="from-accent/25 to-accent-2/20 absolute inset-0 bg-linear-to-br via-transparent"></div>
+    <div class="absolute inset-0 [background-image:linear-gradient(var(--border)_1px,transparent_1px),linear-gradient(90deg,var(--border)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
+    <div class="animate-blob from-accent to-accent-2 absolute -right-10 -bottom-16 size-48 bg-linear-to-br opacity-30 blur-2xl transition-opacity group-hover:opacity-50"></div>
+    <div
+      class:list={[
+        "border-border bg-bg/70 text-accent absolute grid place-items-center rounded-2xl border shadow-lg backdrop-blur transition duration-500 group-hover:scale-110 group-hover:-rotate-6",
+        large ? "top-10 left-8 size-24" : "top-6 left-6 size-16",
+      ]}
+    >
+      <Icon
+        name={data.icon}
+        class={large ? "size-12" : "size-8"}
+        strokeWidth={1.75}
+      />
+    </div>
+    {large && (
+      <div class="absolute right-6 bottom-6 hidden max-w-[55%] flex-wrap justify-end gap-2 sm:flex">
+        {data.stack.slice(0, 5).map((tech, i) => (
+          <span
+            class="animate-float-slow border-border bg-bg/80 text-muted rounded-lg border px-2.5 py-1 font-mono text-xs shadow-sm backdrop-blur"
+            style={{ "--dy": "-8px", animationDelay: `${String(-i * 1.7)}s` }}
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+    )}
+  </div>
+
+  <div class="flex flex-1 flex-col p-6">
+    <div class="text-muted flex items-center justify-between gap-3 font-mono text-xs">
+      <span>
+        {t(`projects.kind.${data.kind}`)} · {year}
+      </span>
+      <span
+        class:list={[
+          "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1",
+          data.status === "live"
+            ? "bg-accent-soft text-accent"
+            : "border-border border",
+        ]}
+      >
+        {data.status === "live" && (
+          <span class="bg-accent size-1.5 animate-pulse rounded-full" />
+        )}
+        {t(`projects.status.${data.status}`)}
+      </span>
+    </div>
+
+    <h3
+      class:list={[
+        "mt-4 font-bold tracking-tight",
+        large ? "text-3xl" : "text-xl",
+      ]}
+    >
+      <a
+        href={href}
+        class="after:absolute after:inset-0 focus-visible:outline-none"
+      >
+        {data.title}
+      </a>
+    </h3>
+    <p class="text-muted mt-2 text-pretty">{data.summary}</p>
+
+    <ul class="mt-5 flex flex-wrap gap-2">
+      {stack.map((tech) => (
+        <li class="bg-bg border-border rounded-md border px-2 py-0.5 font-mono text-xs">
+          {tech}
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-auto flex items-center justify-between pt-6 text-sm font-medium">
+      <span class="text-accent inline-flex items-center gap-1.5">
+        {t("projects.caseStudy")}
+        <Icon
+          name="arrow-right"
+          class="size-4 transition-transform group-hover:translate-x-1"
+        />
+      </span>
+      {data.links.live && (
+        <a
+          href={data.links.live}
+          class="text-muted hover:text-fg relative z-10 inline-flex items-center gap-1"
+          rel="noopener"
+          target="_blank"
+        >
+          {t("projects.live")}
+          <Icon name="arrow" class="size-4" />
+        </a>
+      )}
+    </div>
+  </div>
+  <span
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 rounded-3xl ring-0 ring-accent transition group-focus-within:ring-2"
+  ></span>
+</article>
