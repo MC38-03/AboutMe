@@ -1,5 +1,7 @@
 import { useId, useState, type SyntheticEvent } from "react";
+import type { Locale } from "@/i18n/locales";
 import { contactSchema, mailtoHref, type ContactField } from "@/lib/contact";
+import { isFirebaseConfigured } from "@/lib/firebase/client";
 
 interface Labels {
   name: string;
@@ -17,6 +19,7 @@ interface Labels {
 
 interface Props {
   to: string;
+  lang: Locale;
   labels: Labels;
 }
 
@@ -25,7 +28,7 @@ type Status = "idle" | "sending" | "success" | "error";
 const fieldClass =
   "w-full rounded-xl border border-border bg-bg/70 px-4 py-3 text-fg placeholder:text-muted/60 transition focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 aria-invalid:border-red-500";
 
-export default function ContactForm({ to, labels }: Props) {
+export default function ContactForm({ to, lang, labels }: Props) {
   const id = useId();
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Partial<Record<ContactField, string>>>(
@@ -38,9 +41,12 @@ export default function ContactForm({ to, labels }: Props) {
     message: labels.errMessage,
   };
 
-  function handleSubmit(event: SyntheticEvent<HTMLFormElement, SubmitEvent>) {
+  async function handleSubmit(
+    event: SyntheticEvent<HTMLFormElement, SubmitEvent>,
+  ) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const data = new FormData(form);
     if (typeof data.get("website") === "string" && data.get("website") !== "") {
       setStatus("success");
       return;
@@ -66,8 +72,15 @@ export default function ContactForm({ to, labels }: Props) {
 
     setErrors({});
     setStatus("sending");
-    try {
+    if (!isFirebaseConfigured) {
       window.location.href = mailtoHref(to, result.data);
+      setStatus("success");
+      return;
+    }
+    try {
+      const { sendMessage } = await import("@/lib/firebase/messages");
+      await sendMessage({ ...result.data, lang });
+      form.reset();
       setStatus("success");
     } catch {
       setStatus("error");
@@ -89,7 +102,13 @@ export default function ContactForm({ to, labels }: Props) {
     ) : null;
 
   return (
-    <form noValidate onSubmit={handleSubmit} className="space-y-5">
+    <form
+      noValidate
+      onSubmit={(event) => {
+        void handleSubmit(event);
+      }}
+      className="space-y-5"
+    >
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label
@@ -165,7 +184,12 @@ export default function ContactForm({ to, labels }: Props) {
             <span className="text-accent">{labels.success}</span>
           )}
           {status === "error" && (
-            <span className="text-red-500">{labels.error}</span>
+            <span className="text-red-500">
+              {labels.error}{" "}
+              <a href={`mailto:${to}`} className="underline">
+                {to}
+              </a>
+            </span>
           )}
         </p>
       </div>
