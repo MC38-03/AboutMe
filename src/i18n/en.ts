@@ -7,6 +7,7 @@ export const en = {
   "nav.projects": "Projects",
   "nav.timeline": "Timeline",
   "nav.skills": "Skills",
+  "nav.ai": "AI",
   "nav.contact": "Contact",
   "nav.skip": "Skip to content",
   "nav.menu": "Menu",
@@ -83,6 +84,39 @@ export const en = {
   "skills.group.tools": "Tools & workflow",
   "skills.group.soft": "Also",
   "skills.soft": "Organising, Leadership, Communication, Working in sprints",
+
+  "ai.label": "AI workflow",
+  "ai.heading": "AI as a tool, not a replacement",
+  "ai.intro":
+    "I work with AI every day: Claude, Claude Code, agents and my own skills. The difference from vibe-coding? I understand the code it produces, and I correct course when it goes wrong.",
+  "ai.vibe.title": "Vibe-coding",
+  "ai.vibe.1": "Prompting until it 'works', without knowing why",
+  "ai.vibe.2": "Accepting generated code blindly",
+  "ai.vibe.3": "No tests, no review, no architecture",
+  "ai.vibe.4": "Stopping learning once AI does the work",
+  "ai.me.title": "My approach",
+  "ai.me.1": "Design first: data model, architecture and constraints",
+  "ai.me.2": "AI gets a clear brief, context and boundaries",
+  "ai.me.3": "Read, understand and rewrite every change where needed",
+  "ai.me.4": "Verify with strict types, linting, tests and CI",
+  "ai.p.foundation.title": "Knowledge as the foundation",
+  "ai.p.foundation.text":
+    "My vocational diploma in Software Development and my bachelor's at AUAS give me the grounding to really judge AI output, from data structures to security.",
+  "ai.p.steer.title": "I steer, AI accelerates",
+  "ai.p.steer.text":
+    "I split work into phases, write clear briefs and let AI handle the execution. The decisions stay with me.",
+  "ai.p.agents.title": "Agents & skills",
+  "ai.p.agents.text":
+    "In Claude Code I use agents and my own skills for recurring work, like research, code reviews and refactors.",
+  "ai.p.learn.title": "Keep learning",
+  "ai.p.learn.text":
+    "Where many developers stopped learning, I use AI to learn faster. I ask why something works, not just how.",
+  "ai.term.title": "my workflow",
+  "ai.term.plan": "pin down phases, data model and constraints",
+  "ai.term.brief": "AI gets context, rules and boundaries",
+  "ai.term.review": "read and understand every diff",
+  "ai.term.verify": "types, lint, tests and build: 0 warnings",
+  "ai.term.ship": "only then does it go live",
 
   "contact.label": "Contact",
   "contact.heading": "Let's build something",

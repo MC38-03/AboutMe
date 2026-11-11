@@ -5,6 +5,7 @@ export const nl = {
   "nav.projects": "Projecten",
   "nav.timeline": "Tijdlijn",
   "nav.skills": "Skills",
+  "nav.ai": "AI",
   "nav.contact": "Contact",
   "nav.skip": "Naar de inhoud",
   "nav.menu": "Menu",
@@ -82,6 +83,39 @@ export const nl = {
   "skills.group.tools": "Tools & workflow",
   "skills.group.soft": "Daarnaast",
   "skills.soft": "Organiseren, Leidinggeven, Communicatie, Werken in sprints",
+
+  "ai.label": "AI-workflow",
+  "ai.heading": "AI als gereedschap, niet als vervanging",
+  "ai.intro":
+    "Ik werk dagelijks met AI: Claude, Claude Code, agents en eigen skills. Het verschil met vibe-coding? Ik begrijp de code die eruit komt en stuur bij waar het misgaat.",
+  "ai.vibe.title": "Vibe-coding",
+  "ai.vibe.1": "Prompten tot het 'werkt', zonder te weten waarom",
+  "ai.vibe.2": "Gegenereerde code blind overnemen",
+  "ai.vibe.3": "Geen tests, geen review, geen architectuur",
+  "ai.vibe.4": "Stoppen met leren zodra AI het werk doet",
+  "ai.me.title": "Mijn aanpak",
+  "ai.me.1": "Eerst ontwerpen: datamodel, architectuur en randvoorwaarden",
+  "ai.me.2": "AI krijgt een duidelijke opdracht, context en grenzen",
+  "ai.me.3": "Elke wijziging lezen, begrijpen en waar nodig herschrijven",
+  "ai.me.4": "Verifiëren met strikte types, linting, tests en CI",
+  "ai.p.foundation.title": "Kennis als fundament",
+  "ai.p.foundation.text":
+    "Mijn mbo-diploma Software Developer en de hbo-opleiding aan de HvA geven me de basis om AI-output echt te beoordelen, van datastructuren tot security.",
+  "ai.p.steer.title": "Ik stuur, AI versnelt",
+  "ai.p.steer.text":
+    "Ik deel werk op in fases, schrijf heldere opdrachten en laat AI het uitvoerende werk doen. De keuzes blijven bij mij.",
+  "ai.p.agents.title": "Agents & skills",
+  "ai.p.agents.text":
+    "In Claude Code zet ik agents en eigen skills in voor terugkerend werk, zoals onderzoek, code-reviews en refactors.",
+  "ai.p.learn.title": "Blijven leren",
+  "ai.p.learn.text":
+    "Waar veel developers stoppen met leren, gebruik ik AI om sneller te leren. Ik vraag waarom iets werkt, niet alleen hoe.",
+  "ai.term.title": "mijn workflow",
+  "ai.term.plan": "fases, datamodel en randvoorwaarden vastleggen",
+  "ai.term.brief": "AI krijgt context, regels en grenzen",
+  "ai.term.review": "elke diff lezen en begrijpen",
+  "ai.term.verify": "types, lint, tests en build: 0 warnings",
+  "ai.term.ship": "pas dan gaat het live",
 
   "contact.label": "Contact",
   "contact.heading": "Laten we iets bouwen",

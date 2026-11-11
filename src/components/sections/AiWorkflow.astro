@@ -1,0 +1,146 @@
+---
+import Icon from "@/components/ui/Icon.astro";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+import type { Locale } from "@/i18n/locales";
+import { useTranslations } from "@/i18n/utils";
+import type { IconName } from "@/lib/icons";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const vibe = [t("ai.vibe.1"), t("ai.vibe.2"), t("ai.vibe.3"), t("ai.vibe.4")];
+const mine = [t("ai.me.1"), t("ai.me.2"), t("ai.me.3"), t("ai.me.4")];
+
+const principles: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: "school",
+    title: t("ai.p.foundation.title"),
+    text: t("ai.p.foundation.text"),
+  },
+  { icon: "compass", title: t("ai.p.steer.title"), text: t("ai.p.steer.text") },
+  { icon: "bot", title: t("ai.p.agents.title"), text: t("ai.p.agents.text") },
+  { icon: "book", title: t("ai.p.learn.title"), text: t("ai.p.learn.text") },
+];
+
+const steps = [
+  { cmd: "plan", text: t("ai.term.plan") },
+  { cmd: "brief", text: t("ai.term.brief") },
+  { cmd: "review", text: t("ai.term.review") },
+  { cmd: "verify", text: t("ai.term.verify") },
+  { cmd: "ship", text: t("ai.term.ship") },
+];
+
+const tools = ["Claude", "Claude Code", "Agents", "Skills", "MCP"];
+---
+
+<section
+  aria-labelledby="ai-title"
+  id="ai"
+  class="relative mx-auto max-w-6xl scroll-mt-20 px-4 py-24 sm:px-6"
+>
+  <div
+    aria-hidden="true"
+    class="animate-aurora bg-accent-2 pointer-events-none absolute top-1/4 right-0 -z-10 size-[26rem] rounded-full opacity-10 blur-[120px]"
+  ></div>
+
+  <SectionHeading
+    id="ai-title"
+    index="05"
+    label={t("ai.label")}
+    heading={t("ai.heading")}
+    intro={t("ai.intro")}
+  />
+
+  <ul class="reveal -mt-6 mb-12 flex flex-wrap gap-2">
+    {tools.map((tool) => (
+      <li class="border-accent/40 bg-accent-soft/40 text-accent rounded-full border px-3 py-1 font-mono text-xs">
+        {tool}
+      </li>
+    ))}
+  </ul>
+
+  <div class="grid gap-5 md:grid-cols-2">
+    <div class="reveal border-border bg-surface/40 rounded-3xl border border-dashed p-6">
+      <h3 class="text-muted font-mono text-sm line-through decoration-red-500/70">
+        {t("ai.vibe.title")}
+      </h3>
+      <ul class="mt-5 space-y-3">
+        {vibe.map((item) => (
+          <li class="text-muted flex gap-3">
+            <span class="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-red-500/10 text-red-500">
+              <Icon name="x" class="size-3" strokeWidth={3} />
+            </span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="reveal border-accent/50 bg-surface/80 relative overflow-hidden rounded-3xl border p-6 shadow-[0_20px_60px_-30px_var(--accent)] [--reveal-delay:120ms]">
+      <div
+        aria-hidden="true"
+        class="animate-blob bg-accent/15 absolute -right-12 -bottom-12 size-44 blur-2xl"
+      ></div>
+      <h3 class="text-accent relative font-mono text-sm">{t("ai.me.title")}</h3>
+      <ul class="relative mt-5 space-y-3">
+        {mine.map((item) => (
+          <li class="flex gap-3 font-medium">
+            <span class="bg-accent text-accent-fg mt-0.5 grid size-5 shrink-0 place-items-center rounded-full">
+              <Icon name="check" class="size-3" strokeWidth={3} />
+            </span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="mt-5 grid gap-5 lg:grid-cols-[1.25fr_1fr]">
+    <div class="grid gap-5 sm:grid-cols-2">
+      {principles.map((p, i) => (
+        <div
+          class="reveal group border-border bg-surface/70 hover:border-accent/50 rounded-3xl border p-6 backdrop-blur transition hover:-translate-y-0.5"
+          style={{ "--reveal-delay": `${String(i * 80)}ms` }}
+        >
+          <span class="bg-accent-soft text-accent grid size-10 place-items-center rounded-xl transition-transform duration-300 group-hover:rotate-6">
+            <Icon name={p.icon} />
+          </span>
+          <h3 class="mt-4 font-semibold">{p.title}</h3>
+          <p class="text-muted mt-2 text-sm leading-relaxed text-pretty">
+            {p.text}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <div class="reveal border-border overflow-hidden rounded-3xl border bg-[#0b0d0e] font-mono text-sm text-[#d6dbd8] shadow-xl [--reveal-delay:200ms]">
+      <div class="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+        <span class="size-3 rounded-full bg-[#ff5f57]"></span>
+        <span class="size-3 rounded-full bg-[#febc2e]"></span>
+        <span class="size-3 rounded-full bg-[#28c840]"></span>
+        <span class="ml-3 text-xs text-white/50">~/{t("ai.term.title")}</span>
+      </div>
+      <ol class="space-y-4 p-5">
+        {steps.map((step, i) => (
+          <li>
+            <p>
+              <span class="text-[#34d399]">$</span>{" "}
+              <span class="text-white">{step.cmd}</span>
+              <span class="text-white/40"> --step {i + 1}</span>
+            </p>
+            <p class="mt-1 pl-4 text-white/60">
+              <span class="text-[#22d3ee]">→</span> {step.text}
+            </p>
+          </li>
+        ))}
+        <li class="text-[#34d399]">
+          ✓ done<span class="animate-pulse">_</span>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
