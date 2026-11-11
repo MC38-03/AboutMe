@@ -28,6 +28,13 @@ const year = new Date().getFullYear();
           © {year} {site.name}
         </p>
         <p class="text-muted">{t("footer.built")}</p>
+        <button
+          type="button"
+          data-open="terminal"
+          class="text-muted/70 hover:text-accent mt-1 hidden font-mono text-xs transition-colors md:block"
+        >
+          {t("footer.terminal")}
+        </button>
       </div>
     </div>
 
