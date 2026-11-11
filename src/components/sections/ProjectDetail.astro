@@ -78,6 +78,16 @@ const blocks = [
             )}
             {t(`projects.status.${data.status}`)}
           </span>
+          <span
+            data-views={slug}
+            data-lang={lang}
+            hidden
+            class="inline-flex items-center gap-1.5"
+          >
+            <Icon name="eye" class="size-3.5" />
+            <span data-count></span>
+            {t("case.views")}
+          </span>
         </p>
         <h1
           class="mt-3 text-5xl font-bold tracking-tighter sm:text-7xl"
@@ -267,3 +277,37 @@ const blocks = [
     </div>
   </div>
 </article>
+
+<script>
+  import { isFirebaseConfigured } from "@/lib/firebase/client";
+
+  const badge = document.querySelector<HTMLElement>("[data-views]");
+  const slug = badge?.dataset.views;
+
+  if (badge && slug && isFirebaseConfigured) {
+    const key = `viewed:${slug}`;
+    let seen = false;
+    try {
+      seen = sessionStorage.getItem(key) !== null;
+    } catch {
+      seen = false;
+    }
+    import("@/lib/firebase/views")
+      .then(({ countView }) => countView(slug, !seen))
+      .then((count) => {
+        const output = badge.querySelector("[data-count]");
+        if (output) {
+          output.textContent = count.toLocaleString(badge.dataset.lang);
+        }
+        badge.hidden = false;
+        try {
+          sessionStorage.setItem(key, "1");
+        } catch {
+          // storage can be blocked
+        }
+      })
+      .catch(() => {
+        badge.hidden = true;
+      });
+  }
+</script>
