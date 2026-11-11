@@ -1,8 +1,8 @@
 ---
-import ThemeToggle from "@/components/ThemeToggle.astro";
+import ThemeToggle from "@/components/ui/ThemeToggle.astro";
 import { site } from "@/data/site";
 import type { Locale } from "@/i18n/locales";
-import { localePath, otherLocale, useTranslations } from "@/i18n/ui";
+import { localePath, otherLocale, useTranslations } from "@/i18n/utils";
 
 interface Props {
   lang: Locale;
