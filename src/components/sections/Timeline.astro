@@ -5,6 +5,7 @@ import SectionHeading from "@/components/ui/SectionHeading.astro";
 import type { Locale } from "@/i18n/locales";
 import { useTranslations } from "@/i18n/utils";
 import { getTimeline, type TimelineItem } from "@/lib/content";
+import { formatRange } from "@/lib/date";
 
 interface Props {
   lang: Locale;
@@ -21,22 +22,6 @@ const kindIcon: Record<TimelineItem["data"]["kind"], IconName> = {
   volunteer: "users",
   milestone: "flag",
 };
-
-const monthFormat = new Intl.DateTimeFormat(lang === "nl" ? "nl-NL" : "en-GB", {
-  month: "short",
-  year: "numeric",
-  timeZone: "UTC",
-});
-
-function formatMonth(value: string): string {
-  return monthFormat.format(new Date(`${value}-01T00:00:00Z`));
-}
-
-function formatRange({ start, end, current }: TimelineItem["data"]): string {
-  if (end) return `${formatMonth(start)} – ${formatMonth(end)}`;
-  if (current) return `${formatMonth(start)} – ${t("timeline.present")}`;
-  return formatMonth(start);
-}
 ---
 
 <section
@@ -83,7 +68,15 @@ function formatRange({ start, end, current }: TimelineItem["data"]): string {
             ]}
           >
             <p class="text-accent flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs">
-              <time datetime={item.data.start}>{formatRange(item.data)}</time>
+              <time datetime={item.data.start}>
+                {formatRange(
+                  lang,
+                  t("timeline.present"),
+                  item.data.start,
+                  item.data.end,
+                  item.data.current,
+                )}
+              </time>
               <span class="text-muted">
                 · {t(`timeline.kind.${item.data.kind}`)}
               </span>
