@@ -74,6 +74,21 @@ export const nl = {
   "projects.next.text":
     "Er staat altijd iets nieuws op de planning. Volg wat ik bouw op GitHub.",
 
+  "case.back": "Alle projecten",
+  "case.problem": "Het probleem",
+  "case.role": "Mijn rol",
+  "case.period": "Periode",
+  "case.team": "Team",
+  "case.stack": "Tech stack",
+  "case.features": "Belangrijkste features",
+  "case.challenges": "Uitdagingen",
+  "case.learned": "Wat ik leerde",
+  "case.visit": "Bekijk live",
+  "case.repo": "Broncode",
+  "case.next": "Volgend project",
+  "case.cta": "Benieuwd hoe ik dit voor jouw team kan doen?",
+  "case.ctaButton": "Neem contact op",
+
   "timeline.label": "Tijdlijn",
   "timeline.heading": "Mijn route tot nu toe",
   "timeline.present": "heden",

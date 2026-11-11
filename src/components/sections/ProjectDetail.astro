@@ -1,0 +1,269 @@
+---
+import { render } from "astro:content";
+import Icon from "@/components/ui/Icon.astro";
+import type { Locale } from "@/i18n/locales";
+import { localePath, useTranslations } from "@/i18n/utils";
+import { projectSlug, type Project } from "@/lib/content";
+import { formatRange } from "@/lib/date";
+
+interface Props {
+  lang: Locale;
+  project: Project;
+  next: Project | undefined;
+}
+
+const { lang, project, next } = Astro.props;
+const t = useTranslations(lang);
+const { data } = project;
+const slug = projectSlug(project);
+const { Content } = await render(project);
+const home = localePath(lang);
+
+const period = formatRange(
+  lang,
+  t("timeline.present"),
+  data.period.start,
+  data.period.end,
+  data.status !== "finished",
+);
+
+const blocks = [
+  { id: "challenges", title: t("case.challenges"), items: data.challenges },
+  { id: "learned", title: t("case.learned"), items: data.learned },
+].filter((block) => block.items.length > 0);
+---
+
+<article class="relative isolate overflow-hidden">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[40rem]"
+  >
+    <div class="animate-aurora bg-accent absolute top-[-30%] left-[15%] size-[34rem] rounded-full opacity-20 blur-[120px]"></div>
+    <div class="animate-aurora bg-accent-2 absolute top-[-10%] right-[5%] size-[26rem] rounded-full opacity-15 blur-[120px] [animation-delay:-8s]"></div>
+    <div class="absolute inset-0 [background-image:radial-gradient(var(--border)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:linear-gradient(to_bottom,black,transparent)]"></div>
+  </div>
+
+  <header class="mx-auto max-w-5xl px-4 pt-12 pb-16 sm:px-6 md:pt-20">
+    <a
+      href={`${home}#projects`}
+      class="text-muted hover:text-accent group inline-flex items-center gap-2 font-mono text-sm transition-colors"
+    >
+      <Icon
+        name="arrow-right"
+        class="size-4 rotate-180 transition-transform group-hover:-translate-x-1"
+      />
+      {t("case.back")}
+    </a>
+
+    <div class="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+      <div>
+        <div
+          class="border-border bg-surface/80 text-accent grid size-20 place-items-center rounded-3xl border shadow-lg backdrop-blur"
+          style={{ viewTransitionName: `project-icon-${slug}` }}
+        >
+          <Icon name={data.icon} class="size-10" strokeWidth={1.75} />
+        </div>
+        <p class="text-muted mt-6 flex flex-wrap items-center gap-3 font-mono text-xs">
+          <span>{t(`projects.kind.${data.kind}`)}</span>
+          <span
+            class:list={[
+              "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1",
+              data.status === "live"
+                ? "bg-accent-soft text-accent"
+                : "border-border border",
+            ]}
+          >
+            {data.status === "live" && (
+              <span class="bg-accent size-1.5 animate-pulse rounded-full" />
+            )}
+            {t(`projects.status.${data.status}`)}
+          </span>
+        </p>
+        <h1
+          class="mt-3 text-5xl font-bold tracking-tighter sm:text-7xl"
+          style={{ viewTransitionName: `project-title-${slug}` }}
+        >
+          {data.title}
+        </h1>
+        <p class="text-muted mt-5 max-w-2xl text-xl leading-relaxed text-pretty">
+          {data.summary}
+        </p>
+      </div>
+
+      <div class="flex shrink-0 flex-wrap gap-3">
+        {data.links.live && (
+          <a
+            href={data.links.live}
+            rel="noopener"
+            target="_blank"
+            class="bg-accent text-accent-fg shadow-accent/30 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
+          >
+            {t("case.visit")}
+            <Icon name="arrow" class="size-4" />
+          </a>
+        )}
+        {data.links.repo && (
+          <a
+            href={data.links.repo}
+            rel="noopener"
+            target="_blank"
+            class="border-border bg-surface/60 hover:border-accent inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold backdrop-blur transition hover:-translate-y-0.5"
+          >
+            <Icon name="github" class="size-4" />
+            {t("case.repo")}
+          </a>
+        )}
+      </div>
+    </div>
+
+    <dl class="border-border bg-surface/60 mt-12 grid divide-y rounded-3xl border backdrop-blur md:grid-cols-3 md:divide-x md:divide-y-0 [&>div]:border-border">
+      <div class="p-6">
+        <dt class="text-muted font-mono text-xs">{t("case.role")}</dt>
+        <dd class="mt-2 font-medium text-pretty">{data.role}</dd>
+      </div>
+      <div class="p-6">
+        <dt class="text-muted font-mono text-xs">{t("case.period")}</dt>
+        <dd class="mt-2 font-medium">{period}</dd>
+        {data.team && (
+          <>
+            <dt class="text-muted mt-4 font-mono text-xs">{t("case.team")}</dt>
+            <dd class="mt-2 font-medium">{data.team}</dd>
+          </>
+        )}
+      </div>
+      <div class="p-6">
+        <dt class="text-muted font-mono text-xs">{t("case.stack")}</dt>
+        <dd class="mt-3 flex flex-wrap gap-2">
+          {data.stack.map((tech) => (
+            <span class="bg-bg border-border rounded-md border px-2 py-0.5 font-mono text-xs">
+              {tech}
+            </span>
+          ))}
+        </dd>
+      </div>
+    </dl>
+  </header>
+
+  <div class="mx-auto max-w-5xl space-y-24 px-4 pb-24 sm:px-6">
+    <section
+      aria-labelledby="problem"
+      class="reveal grid gap-6 md:grid-cols-[14rem_1fr]"
+    >
+      <h2
+        id="problem"
+        class="self-start pt-2 text-accent flex items-center gap-3 font-mono text-sm"
+      >
+        <span class="text-muted">01</span>
+        {t("case.problem")}
+      </h2>
+      <p class="text-2xl leading-relaxed font-medium tracking-tight text-balance sm:text-3xl">
+        {data.problem}
+      </p>
+    </section>
+
+    <section aria-labelledby="features">
+      <h2
+        id="features"
+        class="reveal text-accent mb-8 flex items-center gap-3 font-mono text-sm"
+      >
+        <span class="text-muted">02</span>
+        {t("case.features")}
+      </h2>
+      <ul class="grid gap-4 sm:grid-cols-2">
+        {data.features.map((feature, i) => (
+          <li
+            class="reveal group border-border bg-surface/70 hover:border-accent/50 flex gap-4 rounded-2xl border p-5 backdrop-blur transition"
+            style={{ "--reveal-delay": `${String((i % 2) * 80)}ms` }}
+          >
+            <span class="text-accent font-mono text-sm">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span class="text-pretty">{feature}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      {blocks.map((block, b) => (
+        <section
+          aria-labelledby={block.id}
+          class="reveal border-border bg-surface/70 relative overflow-hidden rounded-3xl border p-6 backdrop-blur sm:p-8"
+          style={{ "--reveal-delay": `${String(b * 120)}ms` }}
+        >
+          <div
+            aria-hidden="true"
+            class="animate-blob from-accent/20 to-accent-2/10 absolute -top-12 -right-12 size-40 bg-linear-to-br blur-2xl"
+          />
+          <h2
+            id={block.id}
+            class="text-accent relative flex items-center gap-3 font-mono text-sm"
+          >
+            <span class="text-muted">{String(b + 3).padStart(2, "0")}</span>
+            {block.title}
+          </h2>
+          <ul class="relative mt-6 space-y-4">
+            {block.items.map((item) => (
+              <li class="flex gap-3">
+                <span class="bg-accent mt-2.5 size-1.5 shrink-0 rounded-full" />
+                <span class="text-pretty">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+
+    <div class="prose-content text-muted max-w-3xl text-lg leading-relaxed empty:hidden">
+      <Content />
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2">
+      {next && (
+        <a
+          href={localePath(lang, `/projects/${projectSlug(next)}`)}
+          class="reveal group border-border bg-surface/70 hover:border-accent/60 flex items-center gap-5 rounded-3xl border p-6 backdrop-blur transition hover:-translate-y-1"
+        >
+          <span
+            class="border-border bg-bg text-accent grid size-14 shrink-0 place-items-center rounded-2xl border"
+            style={{ viewTransitionName: `project-icon-${projectSlug(next)}` }}
+          >
+            <Icon name={next.data.icon} class="size-7" strokeWidth={1.75} />
+          </span>
+          <span class="flex-1">
+            <span class="text-muted block font-mono text-xs">
+              {t("case.next")}
+            </span>
+            <span class="text-xl font-bold tracking-tight">
+              {next.data.title}
+            </span>
+          </span>
+          <Icon
+            name="arrow-right"
+            class="text-accent size-5 transition-transform group-hover:translate-x-1"
+          />
+        </a>
+      )}
+      <a
+        href={`${home}#contact`}
+        class:list={[
+          "reveal group from-accent to-accent-2 text-accent-fg flex items-center justify-between gap-5 rounded-3xl bg-linear-to-br p-6 transition hover:-translate-y-1",
+          !next && "md:col-span-2",
+        ]}
+      >
+        <span>
+          <span class="block text-lg font-bold tracking-tight">
+            {t("case.cta")}
+          </span>
+          <span class="mt-1 block text-sm opacity-80">
+            {t("case.ctaButton")}
+          </span>
+        </span>
+        <Icon
+          name="arrow-right"
+          class="size-6 shrink-0 transition-transform group-hover:translate-x-1"
+        />
+      </a>
+    </div>
+  </div>
+</article>

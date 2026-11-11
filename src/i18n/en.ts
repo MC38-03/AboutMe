@@ -75,6 +75,21 @@ export const en = {
   "projects.next.text":
     "There is always something new in the works. Follow what I build on GitHub.",
 
+  "case.back": "All projects",
+  "case.problem": "The problem",
+  "case.role": "My role",
+  "case.period": "Period",
+  "case.team": "Team",
+  "case.stack": "Tech stack",
+  "case.features": "Key features",
+  "case.challenges": "Challenges",
+  "case.learned": "What I learned",
+  "case.visit": "Visit live",
+  "case.repo": "Source code",
+  "case.next": "Next project",
+  "case.cta": "Curious what I could build for your team?",
+  "case.ctaButton": "Get in touch",
+
   "timeline.label": "Timeline",
   "timeline.heading": "My journey so far",
   "timeline.present": "present",
