@@ -39,7 +39,8 @@ const kindIcon: Record<TimelineItem["data"]["kind"], IconName> = {
   <ol class="relative">
     <span
       aria-hidden="true"
-      class="from-accent via-accent-2 absolute top-2 bottom-2 left-5 w-px bg-linear-to-b to-transparent md:left-1/2"
+      data-draw
+      class="from-accent via-accent-2 absolute top-2 bottom-2 left-5 w-px origin-top bg-linear-to-b to-transparent [transform:scaleY(var(--draw,1))] md:left-1/2"
     ></span>
     {items.map((item, i) => {
       const left = i % 2 === 0;

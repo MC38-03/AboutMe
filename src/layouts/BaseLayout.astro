@@ -1,10 +1,13 @@
 ---
 import "@/styles/global.css";
+import CommandPalette from "@/components/islands/CommandPalette";
+import Terminal from "@/components/islands/Terminal";
 import Footer from "@/components/layout/Footer.astro";
 import Header from "@/components/layout/Header.astro";
 import { site } from "@/data/site";
 import type { Locale } from "@/i18n/locales";
 import { localePath, otherLocale, useTranslations } from "@/i18n/utils";
+import { getOverlayData } from "@/lib/overlay";
 
 interface Props {
   lang: Locale;
@@ -19,6 +22,7 @@ const pageTitle = title ? `${title} | ${site.name}` : site.name;
 const pageDescription = description ?? t("meta.description");
 const canonical = new URL(localePath(lang, path), Astro.site);
 const alternate = new URL(localePath(otherLocale(lang), path), Astro.site);
+const overlay = await getOverlayData(lang, path);
 ---
 
 <!doctype html>
@@ -53,6 +57,11 @@ const alternate = new URL(localePath(otherLocale(lang), path), Astro.site);
     </script>
   </head>
   <body class="flex min-h-dvh flex-col">
+    <div
+      data-progress
+      aria-hidden="true"
+      class="from-accent to-accent-2 fixed inset-x-0 top-0 z-[55] h-0.5 origin-left scale-x-0 bg-linear-to-r"
+    ></div>
     <a
       href="#main"
       class="bg-accent text-accent-fg sr-only z-50 rounded-md px-4 py-2 focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
@@ -64,6 +73,11 @@ const alternate = new URL(localePath(otherLocale(lang), path), Astro.site);
       <slot />
     </main>
     <Footer lang={lang} />
+    <CommandPalette client:idle data={overlay} />
+    <Terminal client:idle data={overlay} />
+    <script>
+      import "@/scripts/effects";
+    </script>
     <script>
       const targets = document.querySelectorAll(".reveal");
       const observer = new IntersectionObserver(

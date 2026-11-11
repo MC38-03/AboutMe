@@ -21,11 +21,21 @@ const stack = large ? data.stack : data.stack.slice(0, 4);
 ---
 
 <article
+  data-tilt
+  data-spotlight
   class:list={[
     "group reveal border-border bg-surface/70 hover:border-accent/60 relative flex flex-col overflow-hidden rounded-3xl border backdrop-blur transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_-20px_var(--accent)]",
     className,
   ]}
 >
+  <span
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 [background:radial-gradient(420px_circle_at_var(--mx)_var(--my),color-mix(in_oklab,var(--accent)_16%,transparent),transparent_60%)]"
+  ></span>
+  <span
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 z-10 opacity-0 mix-blend-overlay transition-opacity duration-300 group-hover:opacity-100 [background:radial-gradient(260px_circle_at_var(--mx)_var(--my),rgba(255,255,255,0.25),transparent_60%)]"
+  ></span>
   <div
     aria-hidden="true"
     class:list={[

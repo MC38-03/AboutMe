@@ -1,5 +1,6 @@
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
+@import "lenis/dist/lenis.css";
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
