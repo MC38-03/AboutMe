@@ -37,14 +37,9 @@ const { label } = Astro.props;
 </button>
 
 <script>
+  import { toggleTheme } from "@/lib/theme";
+
   document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const dark = document.documentElement.classList.toggle("dark");
-      try {
-        localStorage.setItem("theme", dark ? "dark" : "light");
-      } catch {
-        // storage can be blocked
-      }
-    });
+    button.addEventListener("click", toggleTheme);
   });
 </script>
