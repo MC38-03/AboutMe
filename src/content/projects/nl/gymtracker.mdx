@@ -1,0 +1,42 @@
+---
+title: GymTracker
+lang: nl
+summary: Een workout-tracker die ik zelf in de sportschool gebruik. Sets in seconden loggen, nooit een workout kwijt en je voortgang over tijd zien.
+kind: personal
+status: live
+period: { start: "2025-03" }
+order: 1
+featured: true
+role: Solo developer — ontwerp, frontend, Firebase-backend, testen en deployen
+stack:
+  [
+    Angular,
+    Ionic,
+    TypeScript,
+    Firebase Auth,
+    Cloud Firestore,
+    Firebase Hosting,
+    Capacitor,
+    PWA,
+  ]
+problem: De meeste workout-apps zijn traag tussen twee sets door, pushen abonnementen of verliezen je workout als de app herlaadt. Ik wilde iets snels, eerlijks en betrouwbaars dat ik zelf echt zou gebruiken.
+features:
+  - Focusweergave met één oefening tegelijk, swipen tussen oefeningen en een rusttimer die start als je een set afvinkt
+  - De lopende workout wordt continu opgeslagen, dus een refresh, crash of slecht bereik kost nooit je workout
+  - Templates, 12 startprogramma's en een eerdere workout herhalen
+  - Voortgang per oefening met records, trendgrafieken en een duidelijk gelabelde geschatte 1RM
+  - Bibliotheek met ~770 oefeningen met start/eind-foto's als uitleg
+  - Progressive overload per oefening met rep-ranges
+  - Donker/licht-modus plus eigen thema's met ingebouwde contrastcheck
+  - Installeerbaar als PWA, Android-app in ontwikkeling met Capacitor
+challenges:
+  - Een lopende workout veilig offline in Firestore bewaren zonder dat de interface ooit blijft hangen op een openstaande write
+  - Een workout afronden als één atomaire batch, zodat een sessie nooit dubbel of half wordt opgeslagen
+  - Strikte Firestore-rules die de vorm van elk document valideren, getest met de emulator
+learned:
+  - Data ontwerpen rond hoe de app echt gebruikt wordt, niet rond de schermen
+  - Security rules en integratieflows testen tegen de Firebase Emulator Suite
+  - Opleveren in kleine, geplande iteraties met feedback van vrienden die de app gebruiken
+links:
+  live: https://gymtracker-d8270.web.app
+---

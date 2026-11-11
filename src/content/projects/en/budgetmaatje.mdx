@@ -1,0 +1,33 @@
+---
+title: Budgetmaatje
+lang: en
+summary: A personal budget app that answers two questions — how much do I still need to set aside this month, and how much can I still spend?
+kind: personal
+status: live
+period: { start: "2026-11" }
+order: 3
+role: Solo developer
+stack:
+  [
+    Angular,
+    Ionic,
+    TypeScript,
+    Firebase Auth,
+    Cloud Firestore,
+    PWA,
+    Vitest,
+    GitHub Actions,
+  ]
+problem: Budgeting apps often show too much. I wanted one clear overview of what is left this month, available offline on my phone.
+features:
+  - Google login with Firebase Auth
+  - Firestore with offline cache, installable as a PWA
+  - CI on GitHub Actions — lint, tests and build, deploy on every push to main and a preview URL per pull request
+challenges:
+  - Running Firestore rule tests against the emulator in CI
+learned:
+  - Modern Angular with standalone components, signals and zoneless change detection
+  - Setting up a strict ESLint and CI pipeline from day one
+links:
+  live: https://budgetmaatje.web.app
+---

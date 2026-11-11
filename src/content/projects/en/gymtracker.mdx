@@ -1,0 +1,42 @@
+---
+title: GymTracker
+lang: en
+summary: A workout tracker I use at the gym myself. Log sets in seconds, never lose a workout, and see your progress over time.
+kind: personal
+status: live
+period: { start: "2025-03" }
+order: 1
+featured: true
+role: Solo developer — design, frontend, Firebase backend, testing and deployment
+stack:
+  [
+    Angular,
+    Ionic,
+    TypeScript,
+    Firebase Auth,
+    Cloud Firestore,
+    Firebase Hosting,
+    Capacitor,
+    PWA,
+  ]
+problem: Most workout apps are slow to log in between sets, push subscriptions, or lose your workout when the app reloads. I wanted something fast, honest and reliable that I would actually use myself.
+features:
+  - Focus view with one exercise at a time, swipe between exercises and a rest timer that starts when you tick a set
+  - The in-progress workout is saved continuously, so a refresh, crash or dead signal never loses it
+  - Templates, 12 starter programs and repeating a past workout
+  - Progress per exercise with records, trend charts and a clearly labelled estimated 1RM
+  - Library of ~770 exercises with start/end photo guides
+  - Per-exercise progressive overload with rep ranges
+  - Dark/light mode plus custom themes with a built-in contrast check
+  - Installable as a PWA, Android app in progress with Capacitor
+challenges:
+  - Keeping a live workout draft in Firestore safe offline without the UI ever hanging on a pending write
+  - Finishing a workout as one atomic batch, so a session is never saved twice or half
+  - Strict Firestore rules that validate the shape of every document, covered by emulator tests
+learned:
+  - Designing data around how the app is really used, not around the screens
+  - Testing security rules and integration flows against the Firebase Emulator Suite
+  - Shipping in small, planned iterations and getting feedback from friends who use the app
+links:
+  live: https://gymtracker-d8270.web.app
+---

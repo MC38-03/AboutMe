@@ -1,0 +1,111 @@
+[
+  {
+    "id": "mbo-start",
+    "start": "2022-09",
+    "end": "2025-07",
+    "kind": "education",
+    "org": "MBO College Amstelland",
+    "title": {
+      "nl": "Start mbo Software Developer",
+      "en": "Started MBO Software Developer"
+    },
+    "description": {
+      "nl": "Mbo niveau 4. Hier leerde ik programmeren: van PHP en JavaScript tot mijn eerste echte webapps.",
+      "en": "Vocational degree (level 4). Where I learned to program, from PHP and JavaScript to my first real web apps."
+    }
+  },
+  {
+    "id": "domits-1",
+    "start": "2024-01",
+    "end": "2024-07",
+    "kind": "internship",
+    "org": "Domits, Haarlem",
+    "title": {
+      "nl": "Stage Software Engineer",
+      "en": "Software Engineering internship"
+    },
+    "description": {
+      "nl": "Mijn eerste stage in een developerteam. Meegebouwd aan het financiële systeem van het platform.",
+      "en": "My first internship in a development team, working on the platform's financial system."
+    }
+  },
+  {
+    "id": "isn",
+    "start": "2024-10",
+    "end": "2026-08",
+    "kind": "volunteer",
+    "org": "Islamitische Stichting Nederland, Amsterdam-Noord",
+    "title": {
+      "nl": "Jongerenvoorzitter (vrijwillig)",
+      "en": "Youth chair (volunteer)"
+    },
+    "description": {
+      "nl": "Leiding gegeven aan de jongerenafdeling: activiteiten georganiseerd, vrijwilligers aangestuurd en de jongeren vertegenwoordigd.",
+      "en": "Led the youth department: organised activities, coordinated volunteers and represented the young members."
+    }
+  },
+  {
+    "id": "domits-2",
+    "start": "2025-01",
+    "end": "2025-06",
+    "kind": "internship",
+    "org": "Domits, Haarlem",
+    "title": {
+      "nl": "Tweede stage bij Domits",
+      "en": "Second internship at Domits"
+    },
+    "description": {
+      "nl": "Terug bij Domits: betalingen en uitbetalingen gebouwd met Stripe, samen met het team.",
+      "en": "Back at Domits, building payments and payouts with Stripe together with the team."
+    }
+  },
+  {
+    "id": "gymtracker",
+    "start": "2025-03",
+    "kind": "milestone",
+    "title": {
+      "nl": "Begonnen aan GymTracker",
+      "en": "Started building GymTracker"
+    },
+    "description": {
+      "nl": "Een eigen workout-tracker, inmiddels live op Firebase en dagelijks in gebruik.",
+      "en": "My own workout tracker, now live on Firebase and in daily use."
+    }
+  },
+  {
+    "id": "mbo-diploma",
+    "start": "2025-07",
+    "kind": "education",
+    "org": "MBO College Amstelland",
+    "title": { "nl": "Mbo-diploma behaald", "en": "MBO diploma" },
+    "description": {
+      "nl": "Diploma Software Developer op zak.",
+      "en": "Graduated as a Software Developer."
+    }
+  },
+  {
+    "id": "hva",
+    "start": "2025-09",
+    "kind": "education",
+    "org": "Hogeschool van Amsterdam",
+    "title": {
+      "nl": "Start hbo Software Engineering",
+      "en": "Started BSc Software Engineering"
+    },
+    "description": {
+      "nl": "De volgende stap: de bachelor Software Engineering aan de HvA.",
+      "en": "The next step: the Software Engineering bachelor at Amsterdam University of Applied Sciences."
+    }
+  },
+  {
+    "id": "workrate",
+    "start": "2025-10",
+    "kind": "work",
+    "org": "Workrate, Amsterdam",
+    "title": { "nl": "Objectbeveiliger", "en": "Security guard" },
+    "description": {
+      "nl": "Naast mijn studie verantwoordelijk voor de veiligheid op locatie. Betrouwbaar zijn, alert blijven en rustig handelen onder druk.",
+      "en": "Alongside my studies, responsible for on-site security. Being reliable, staying alert and keeping calm under pressure."
+    }
+  }
+]

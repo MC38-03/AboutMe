@@ -1,0 +1,33 @@
+---
+title: Budgetmaatje
+lang: nl
+summary: Een persoonlijke budget-app die twee vragen beantwoordt — hoeveel moet ik deze maand nog opzij zetten, en hoeveel kan ik nog uitgeven?
+kind: personal
+status: live
+period: { start: "2026-11" }
+order: 3
+role: Solo developer
+stack:
+  [
+    Angular,
+    Ionic,
+    TypeScript,
+    Firebase Auth,
+    Cloud Firestore,
+    PWA,
+    Vitest,
+    GitHub Actions,
+  ]
+problem: Budget-apps laten vaak te veel zien. Ik wilde één helder overzicht van wat er deze maand nog over is, ook offline op mijn telefoon.
+features:
+  - Inloggen met Google via Firebase Auth
+  - Firestore met offline-cache, installeerbaar als PWA
+  - CI via GitHub Actions — lint, tests en build, deploy bij elke push naar main en een preview-URL per pull request
+challenges:
+  - Firestore-rules-tests tegen de emulator draaien in CI
+learned:
+  - Modern Angular met standalone components, signals en zoneless change detection
+  - Vanaf dag één een strikte ESLint- en CI-pipeline opzetten
+links:
+  live: https://budgetmaatje.web.app
+---
