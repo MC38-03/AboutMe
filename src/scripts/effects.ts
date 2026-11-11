@@ -94,6 +94,10 @@ const segmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
 function scramble(el: HTMLElement, delay: number) {
   const target = el.textContent;
   const chars = Array.from(segmenter.segment(target), (part) => part.segment);
+  const { width } = el.getBoundingClientRect();
+  el.style.display = "inline-block";
+  el.style.width = `${String(width)}px`;
+  el.style.whiteSpace = "nowrap";
   const duration = 900;
   let start: number | undefined;
 
@@ -113,7 +117,12 @@ function scramble(el: HTMLElement, delay: number) {
       })
       .join("");
     if (progress < 1) requestAnimationFrame(frame);
-    else el.textContent = target;
+    else {
+      el.textContent = target;
+      el.style.removeProperty("display");
+      el.style.removeProperty("width");
+      el.style.removeProperty("white-space");
+    }
   };
 
   requestAnimationFrame(frame);

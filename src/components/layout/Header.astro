@@ -26,15 +26,14 @@ const links = [
 
 <header class="border-border bg-bg/80 sticky top-0 z-40 border-b backdrop-blur">
   <nav class="mx-auto flex h-16 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
-    <a
-      href={home}
-      class="flex items-center gap-2 font-semibold tracking-tight"
-      aria-label={site.name}
-    >
-      <span class="bg-accent text-accent-fg grid size-8 place-items-center rounded-lg font-mono text-sm">
+    <a href={home} class="flex items-center gap-2 font-semibold tracking-tight">
+      <span
+        aria-hidden="true"
+        class="bg-accent text-accent-fg grid size-8 place-items-center rounded-lg font-mono text-sm"
+      >
         {site.initials}
       </span>
-      <span class="hidden sm:inline">{site.name}</span>
+      <span class="sr-only sm:not-sr-only">{site.name}</span>
     </a>
 
     <ul class="hidden items-center gap-6 text-sm md:flex">
@@ -63,7 +62,6 @@ const links = [
       <button
         type="button"
         data-open="palette"
-        aria-label={t("palette.open")}
         title={t("palette.open")}
         class="border-border text-muted hover:text-fg hover:border-accent mr-1 hidden items-center gap-2 rounded-lg border px-2.5 py-1.5 font-mono text-xs transition-colors sm:inline-flex"
       >
@@ -78,6 +76,7 @@ const links = [
           <circle cx="11" cy="11" r="7"></circle>
           <path d="m20 20-3.5-3.5"></path>
         </svg>
+        <span class="sr-only">{t("palette.open")}</span>
         <span data-shortcut>⌘K</span>
       </button>
       <ThemeToggle label={t("theme.toggle")} />
