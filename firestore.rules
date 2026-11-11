@@ -1,0 +1,36 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isValidMessage(data) {
+      return data.keys().hasAll(['name', 'email', 'message', 'lang', 'createdAt'])
+        && data.keys().hasOnly(['name', 'email', 'message', 'lang', 'createdAt'])
+        && data.name is string
+        && data.name.size() > 0 && data.name.size() <= 100
+        && data.email is string
+        && data.email.size() <= 254
+        && data.email.matches('^[^@ ]+@[^@ ]+[.][^@ ]+$')
+        && data.message is string
+        && data.message.size() >= 10 && data.message.size() <= 2000
+        && data.lang in ['nl', 'en']
+        && data.createdAt == request.time;
+    }
+
+    match /messages/{messageId} {
+      allow create: if isValidMessage(request.resource.data);
+    }
+
+    match /views/{slug} {
+      allow get: if slug.matches('^[a-z0-9-]{1,40}$');
+      allow create: if slug.matches('^[a-z0-9-]{1,40}$')
+        && request.resource.data.keys().hasOnly(['count'])
+        && request.resource.data.count == 1;
+      allow update: if request.resource.data.keys().hasOnly(['count'])
+        && request.resource.data.count == resource.data.count + 1;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
