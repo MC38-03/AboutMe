@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import portrait from "@/assets/images/portrait.jpg";
+import { site } from "@/data/site";
+import type { Locale } from "@/i18n/locales";
+import { useTranslations } from "@/i18n/ui";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="mx-auto grid max-w-5xl items-center gap-10 px-4 py-16 sm:px-6 md:grid-cols-[1fr_auto] md:py-24">
+  <div>
+    <p class="text-accent font-mono text-sm">{t("hero.greeting")}</p>
+    <h1 class="mt-2 text-4xl font-bold tracking-tight text-balance sm:text-5xl">
+      {site.name}
+    </h1>
+    <p class="text-muted mt-3 text-lg">{t("hero.role")}</p>
+    <p class="mt-6 max-w-xl text-lg leading-relaxed text-pretty">
+      {t("hero.intro")}
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a
+        href="#projects"
+        class="bg-accent text-accent-fg rounded-lg px-5 py-2.5 text-sm font-medium transition-opacity hover:opacity-90"
+      >
+        {t("hero.cta.projects")}
+      </a>
+      <a
+        href={site.cvPath}
+        download
+        class="border-border hover:bg-surface rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors"
+      >
+        {t("hero.cta.cv")}
+      </a>
+    </div>
+  </div>
+  <Image
+    src={portrait}
+    alt={t("hero.portraitAlt")}
+    width={256}
+    height={256}
+    loading="eager"
+    fetchpriority="high"
+    class="border-border size-40 rounded-2xl border object-cover shadow-sm md:size-64"
+  />
+</section>
