@@ -35,6 +35,13 @@ const steps = [
 ];
 
 const tools = ["Claude", "Claude Code", "Agents", "Skills", "MCP"];
+
+const milestones = [
+  { when: t("ai.story.m1.when"), text: t("ai.story.m1") },
+  { when: t("ai.story.m2.when"), text: t("ai.story.m2") },
+  { when: t("ai.story.m3.when"), text: t("ai.story.m3") },
+  { when: t("ai.story.m4.when"), text: t("ai.story.m4") },
+];
 ---
 
 <section
@@ -62,6 +69,51 @@ const tools = ["Claude", "Claude Code", "Agents", "Skills", "MCP"];
       </li>
     ))}
   </ul>
+
+  <article class="reveal border-border bg-surface/70 relative mb-5 grid gap-8 overflow-hidden rounded-3xl border p-6 backdrop-blur sm:p-8 lg:grid-cols-[1.3fr_1fr]">
+    <span
+      aria-hidden="true"
+      class="text-accent/10 pointer-events-none absolute -top-6 left-4 font-serif text-[10rem] leading-none select-none"
+    >
+      &ldquo;
+    </span>
+    <div class="relative">
+      <p class="text-accent font-mono text-xs tracking-widest uppercase">
+        {t("ai.story.label")}
+      </p>
+      <h3 class="mt-3 text-2xl font-bold tracking-tight text-balance sm:text-3xl">
+        {t("ai.story.title")}
+      </h3>
+      <div class="text-muted mt-5 space-y-4 text-lg leading-relaxed">
+        <p>{t("ai.story.p1")}</p>
+        <p class="text-fg font-medium">{t("ai.story.p2")}</p>
+        <p>{t("ai.story.p3")}</p>
+      </div>
+    </div>
+
+    <ol class="relative self-center">
+      <span
+        aria-hidden="true"
+        class="from-accent via-accent-2 absolute top-3 bottom-3 left-[7px] w-0.5 bg-linear-to-b to-transparent"
+      ></span>
+      {milestones.map((m, i) => (
+        <li class="relative pb-6 pl-8 last:pb-0">
+          <span
+            class:list={[
+              "absolute top-1.5 left-0 size-4 rounded-full border-2",
+              i === milestones.length - 1
+                ? "bg-accent border-accent shadow-[0_0_14px_var(--accent)]"
+                : i === 1
+                  ? "border-red-500 bg-red-500/20"
+                  : "border-accent bg-bg",
+            ]}
+          />
+          <p class="text-accent font-mono text-xs">{m.when}</p>
+          <p class="mt-0.5 font-medium">{m.text}</p>
+        </li>
+      ))}
+    </ol>
+  </article>
 
   <div class="grid gap-5 md:grid-cols-2">
     <div class="reveal border-border bg-surface/40 rounded-3xl border border-dashed p-6">
