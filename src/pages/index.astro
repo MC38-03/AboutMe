@@ -1,0 +1,36 @@
+---
+import "@/styles/global.css";
+import { getProjects, getTimeline, projectSlug } from "@/lib/content";
+
+const projects = await getProjects("nl");
+const timeline = await getTimeline();
+---
+
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Muhammed Çetinkaya</title>
+  </head>
+  <body class="p-8 font-mono">
+    <main>
+      <h1 class="text-2xl font-bold">Muhammed Çetinkaya</h1>
+      <h2 class="mt-6">projects ({projects.length})</h2>
+      <ul>
+        {projects.map((p) => (
+          <li>
+            {projectSlug(p)}: {p.data.title}
+          </li>
+        ))}
+      </ul>
+      <h2 class="mt-6">timeline ({timeline.length})</h2>
+      <ul>
+        {timeline.map((t) => (
+          <li>
+            {t.data.start} {t.data.title.nl}
+          </li>
+        ))}
+      </ul>
+    </main>
+  </body>
+</html>

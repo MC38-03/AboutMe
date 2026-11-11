@@ -1,0 +1,17 @@
+dist/
+.astro/
+node_modules/
+
+.env
+.env.*
+!.env.example
+
+.firebase/
+*-debug.log
+firebase-debug.*.log
+service-account*.json
+
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
