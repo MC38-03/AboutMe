@@ -34,6 +34,7 @@ The site is static. Firebase is only used for hosting, the contact form and the 
 - With `PUBLIC_FIREBASE_EMULATOR=true` the site talks to the local emulator, so run `npm run emulators` next to `npm run dev`.
 - `messages` is create-only with validation on every field. `views` only allows a counter to go up by one.
 - App Check (reCAPTCHA Enterprise) turns on when `PUBLIC_RECAPTCHA_SITE_KEY` is set.
+- `functions/` holds one Cloud Function that emails me when a new message is created. It needs the secrets `RESEND_API_KEY` and `NOTIFY_EMAIL` (`firebase functions:secrets:set <NAME>`) and is deployed by hand with `firebase deploy --only functions`.
 
 ## Deploy
 

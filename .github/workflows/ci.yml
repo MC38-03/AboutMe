@@ -38,11 +38,13 @@ jobs:
           distribution: temurin
           java-version: 21
       - run: npm ci
+      - run: npm ci --prefix functions
       - run: npx astro sync
       - run: npm run format:check
       - run: npm run lint
       - run: npm run test:rules
       - run: npm run build
+      - run: npm run build --prefix functions
       - uses: actions/upload-artifact@v4
         with:
           name: dist
