@@ -6,7 +6,16 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default defineConfig(
-  { ignores: ["dist/", ".astro/", "node_modules/", ".firebase/", "public/"] },
+  {
+    ignores: [
+      "dist/",
+      ".astro/",
+      "node_modules/",
+      ".firebase/",
+      "public/",
+      "functions/lib/",
+    ],
+  },
   js.configs.recommended,
   tseslint.configs.strictTypeChecked,
   tseslint.configs.stylisticTypeChecked,
