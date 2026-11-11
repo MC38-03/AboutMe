@@ -40,8 +40,17 @@ export const en = {
   "about.fact.now": "Currently",
   "about.fact.nowValue": "The Android version of GymTracker",
   "about.fact.languages": "Languages",
-  "about.fact.hobbies": "Hobbies",
-  "about.fact.hobbiesValue": "Futsal, gaming, reading",
+  "life.label": "Outside of code",
+  "life.heading": "When the laptop closes",
+  "life.reading.title": "Reading",
+  "life.reading.text":
+    "Islamic theology. Next to technology, theology is my big interest, and I love reading about it.",
+  "life.gaming.title": "Playing",
+  "life.gaming.text": "Mostly these two right now. And soon, of course:",
+  "life.gaming.soon": "soon",
+  "life.sport.title": "On the pitch",
+  "life.sport.text":
+    "Futsal. Away from the screen for a bit, on the pitch with a team.",
   "spoken.nl": "Dutch",
   "spoken.en": "English",
   "spoken.tr": "Turkish",
@@ -89,6 +98,22 @@ export const en = {
   "ai.heading": "AI as a tool, not a replacement",
   "ai.intro":
     "I work with AI every day: Claude, Claude Code, agents and my own skills. The difference from vibe-coding? I understand the code it produces, and I correct course when it goes wrong.",
+  "ai.story.label": "My story",
+  "ai.story.title": "Why I understand what AI writes",
+  "ai.story.p1":
+    "I had just started vocational school when ChatGPT was suddenly everywhere. From then on, I saw more and more students let AI do their assignments instead of doing them themselves.",
+  "ai.story.p2":
+    "I deliberately went the other way: I finished my degree with minimal use of AI. That's why I really have the fundamentals of programming down.",
+  "ai.story.p3":
+    "Now I do use AI, as an accelerator. Precisely because I know the fundamentals, I can see when it gets things right, and especially when it doesn't.",
+  "ai.story.m1.when": "2022",
+  "ai.story.m1": "Started MBO Software Developer",
+  "ai.story.m2.when": "Late 2022",
+  "ai.story.m2": "ChatGPT breaks through, students stop doing the work",
+  "ai.story.m3.when": "2025",
+  "ai.story.m3": "Diploma in hand, with minimal AI use",
+  "ai.story.m4.when": "Now",
+  "ai.story.m4": "AI as a tool, backed by real knowledge",
   "ai.vibe.title": "Vibe-coding",
   "ai.vibe.1": "Prompting until it 'works', without knowing why",
   "ai.vibe.2": "Accepting generated code blindly",

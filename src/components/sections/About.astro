@@ -2,6 +2,7 @@
 import Icon from "@/components/ui/Icon.astro";
 import type { IconName } from "@/lib/icons";
 import SectionHeading from "@/components/ui/SectionHeading.astro";
+import { personal } from "@/data/personal";
 import { site } from "@/data/site";
 import type { Locale } from "@/i18n/locales";
 import { useTranslations } from "@/i18n/utils";
@@ -30,11 +31,6 @@ const facts: { icon: IconName; label: string; value: string }[] = [
     value: t("about.fact.nowValue"),
   },
   { icon: "globe", label: t("about.fact.languages"), value: languages },
-  {
-    icon: "heart",
-    label: t("about.fact.hobbies"),
-    value: t("about.fact.hobbiesValue"),
-  },
 ];
 ---
 
@@ -84,6 +80,81 @@ const facts: { icon: IconName; label: string; value: string }[] = [
           </div>
         ))}
       </dl>
+    </div>
+  </div>
+
+  <div class="mt-20">
+    <p class="reveal text-accent flex items-center gap-3 font-mono text-sm">
+      <span class="bg-accent h-px w-8"></span>
+      {t("life.label")}
+    </p>
+    <h3 class="reveal mt-3 text-2xl font-bold tracking-tight sm:text-3xl">
+      {t("life.heading")}
+    </h3>
+
+    <div class="mt-8 grid gap-5 md:grid-cols-3">
+      <article class="reveal group border-border bg-surface/70 hover:border-accent/50 relative overflow-hidden rounded-3xl border p-6 backdrop-blur transition hover:-translate-y-1">
+        <div
+          aria-hidden="true"
+          class="text-accent/10 absolute -right-6 -bottom-8 transition-transform duration-500 group-hover:-rotate-12"
+        >
+          <Icon name="book" class="size-40" strokeWidth={1} />
+        </div>
+        <span class="bg-accent-soft text-accent relative grid size-10 place-items-center rounded-xl">
+          <Icon name="book" />
+        </span>
+        <h4 class="relative mt-4 font-semibold">{t("life.reading.title")}</h4>
+        <p class="text-muted relative mt-2 text-pretty">
+          {t("life.reading.text")}
+        </p>
+      </article>
+
+      <article class="reveal group border-border bg-surface/70 hover:border-accent/50 relative overflow-hidden rounded-3xl border p-6 backdrop-blur transition hover:-translate-y-1 [--reveal-delay:100ms]">
+        <div
+          aria-hidden="true"
+          class="text-accent-2/10 absolute -right-6 -bottom-8 transition-transform duration-500 group-hover:rotate-12"
+        >
+          <Icon name="gamepad" class="size-40" strokeWidth={1} />
+        </div>
+        <span class="bg-accent-soft text-accent relative grid size-10 place-items-center rounded-xl">
+          <Icon name="gamepad" />
+        </span>
+        <h4 class="relative mt-4 font-semibold">{t("life.gaming.title")}</h4>
+        <ul class="relative mt-3 flex flex-wrap gap-2">
+          {personal.nowPlaying.map((game) => (
+            <li class="bg-bg border-border rounded-lg border px-2.5 py-1 font-mono text-xs">
+              {game}
+            </li>
+          ))}
+        </ul>
+        <p class="text-muted relative mt-3 text-pretty">
+          {t("life.gaming.text")}
+        </p>
+        <p class="relative mt-2 inline-flex items-center gap-2">
+          <span class="from-accent to-accent-2 bg-linear-to-r bg-clip-text font-bold text-transparent">
+            {personal.upcoming}
+          </span>
+          <span class="border-accent/40 text-accent rounded-full border px-2 py-0.5 font-mono text-[10px] uppercase">
+            {t("life.gaming.soon")}
+          </span>
+        </p>
+      </article>
+
+      <article class="reveal group border-border bg-surface/70 hover:border-accent/50 relative overflow-hidden rounded-3xl border p-6 backdrop-blur transition hover:-translate-y-1 [--reveal-delay:200ms]">
+        <div
+          aria-hidden="true"
+          class="text-accent/10 animate-spin-slow absolute -right-8 -bottom-10"
+        >
+          <Icon name="ball" class="size-40" strokeWidth={1} />
+        </div>
+        <span class="bg-accent-soft text-accent relative grid size-10 place-items-center rounded-xl">
+          <Icon name="ball" />
+        </span>
+        <h4 class="relative mt-4 font-semibold">{t("life.sport.title")}</h4>
+        <p class="text-muted relative mt-2 text-pretty">
+          {t("life.sport.text")}
+        </p>
+      </article>
     </div>
   </div>
 </section>

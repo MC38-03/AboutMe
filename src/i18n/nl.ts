@@ -38,8 +38,18 @@ export const nl = {
   "about.fact.now": "Nu bezig met",
   "about.fact.nowValue": "De Android-versie van GymTracker",
   "about.fact.languages": "Talen",
-  "about.fact.hobbies": "Hobby's",
-  "about.fact.hobbiesValue": "Zaalvoetbal, gamen, lezen",
+  "life.label": "Buiten code",
+  "life.heading": "Als de laptop dichtgaat",
+  "life.reading.title": "Aan het lezen",
+  "life.reading.text":
+    "Islamitische theologie. Naast technologie is theologie mijn grote interesse, en daar lees ik graag over.",
+  "life.gaming.title": "Aan het gamen",
+  "life.gaming.text":
+    "Op dit moment vooral deze twee. En binnenkort natuurlijk:",
+  "life.gaming.soon": "binnenkort",
+  "life.sport.title": "Op het veld",
+  "life.sport.text":
+    "Zaalvoetbal. Even niet achter een scherm, maar met een team op het veld.",
   "spoken.nl": "Nederlands",
   "spoken.en": "Engels",
   "spoken.tr": "Turks",
@@ -88,6 +98,22 @@ export const nl = {
   "ai.heading": "AI als gereedschap, niet als vervanging",
   "ai.intro":
     "Ik werk dagelijks met AI: Claude, Claude Code, agents en eigen skills. Het verschil met vibe-coding? Ik begrijp de code die eruit komt en stuur bij waar het misgaat.",
+  "ai.story.label": "Mijn verhaal",
+  "ai.story.title": "Waarom ik snap wat AI schrijft",
+  "ai.story.p1":
+    "Ik zat net op het mbo toen ChatGPT ineens overal was. Vanaf dat moment zag ik steeds meer studenten hun opdrachten door AI laten maken, in plaats van ze zelf te maken.",
+  "ai.story.p2":
+    "Ik koos bewust een andere weg: ik heb mijn opleiding afgerond met minimaal gebruik van AI. Daardoor heb ik de basis van programmeren echt onder de knie.",
+  "ai.story.p3":
+    "Nu gebruik ik AI wel, als versneller. Juist omdat ik de basis ken, zie ik wanneer het goed gaat, en vooral wanneer niet.",
+  "ai.story.m1.when": "2022",
+  "ai.story.m1": "Start mbo Software Developer",
+  "ai.story.m2.when": "Eind 2022",
+  "ai.story.m2": "ChatGPT breekt door, studenten stoppen met zelf maken",
+  "ai.story.m3.when": "2025",
+  "ai.story.m3": "Diploma op zak, met minimaal AI-gebruik",
+  "ai.story.m4.when": "Nu",
+  "ai.story.m4": "AI als gereedschap, met kennis van zaken",
   "ai.vibe.title": "Vibe-coding",
   "ai.vibe.1": "Prompten tot het 'werkt', zonder te weten waarom",
   "ai.vibe.2": "Gegenereerde code blind overnemen",
